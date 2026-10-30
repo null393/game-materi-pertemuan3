@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Misi Pendamping ABH</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg1:#f3eefa;--bg2:#e2d3f5;--card:#ffffff;--ink:#2b1646;--mute:#6b5a85;--pri:#4a2870;--pri2:#7a3fb0;--gold:#c49b2a;--ok:#1f9d63;--okbg:#dcf5e8;--bad:#d64550;--badbg:#fde3e5;--line:#e4daf0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#1d0f33;--bg2:#3a1d5e;--card:#2c1749;--ink:#f4ecff;--mute:#b9a6d6;--pri:#d9b8ff;--pri2:#b07be8;--gold:#f0c24a;--ok:#4fd49a;--okbg:#17402f;--bad:#ff7a85;--badbg:#4a1d2a;--line:#47296b}}
+:root[data-theme="dark"]{--bg1:#1d0f33;--bg2:#3a1d5e;--card:#2c1749;--ink:#f4ecff;--mute:#b9a6d6;--pri:#d9b8ff;--pri2:#b07be8;--gold:#f0c24a;--ok:#4fd49a;--okbg:#17402f;--bad:#ff7a85;--badbg:#4a1d2a;--line:#47296b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:linear-gradient(160deg,var(--bg1),var(--bg2)) fixed;color:var(--ink);font-family:Nunito,system-ui,sans-serif;font-size:16px;line-height:1.5}
+#app{max-width:640px;margin:0 auto;padding:16px}
+h1,h2,h3{font-family:"Baloo 2",Nunito,sans-serif;margin:0;line-height:1.15}
+.card{background:var(--card);border-radius:22px;padding:22px;box-shadow:0 10px 30px rgba(74,40,112,.18);border:1px solid var(--line);animation:rise .4s ease}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero{text-align:center}
+.big{font-size:64px;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(-4deg)}}
+.hero h1{font-size:38px;color:var(--pri);margin:6px 0}
+.tag{display:inline-block;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.mute{color:var(--mute)}
+.btn{display:block;width:100%;border:0;border-radius:16px;padding:14px 18px;font:800 17px Nunito,sans-serif;cursor:pointer;background:linear-gradient(135deg,var(--pri2),#4a2870);color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.22);transition:transform .1s}
+.btn:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.22)}
+.btn.gold{background:linear-gradient(135deg,#e2b94a,#b8861a);color:#2b1646}
+.btn.ghost{background:transparent;color:var(--pri);box-shadow:none;border:2px solid var(--line)}
+.row{display:flex;gap:10px;align-items:center}
+.hud{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-weight:800;gap:8px;flex-wrap:wrap}
+.pill{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:14px}
+.hearts{letter-spacing:2px}
+.bar{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0 14px}
+.bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--ok),var(--gold),var(--bad));background-size:300% 100%;transition:width .1s linear}
+.dots{display:flex;gap:6px;margin-bottom:12px}
+.dots b{flex:1;height:6px;border-radius:9px;background:var(--line)}
+.dots b.on{background:var(--gold)}.dots b.done{background:var(--ok)}
+.q{font:600 21px/1.35 "Baloo 2",Nunito,sans-serif;margin:6px 0 16px}
+.opt{display:flex;gap:12px;align-items:center;width:100%;text-align:left;margin:0 0 10px;padding:13px 14px;border-radius:16px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:700 16px Nunito,sans-serif;cursor:pointer;transition:.15s}
+.opt:hover:not(:disabled){border-color:var(--pri2);transform:translateX(3px)}
+.opt .k{flex:none;width:30px;height:30px;border-radius:10px;background:var(--bg2);color:var(--pri);display:grid;place-items:center;font-weight:800}
+.opt.ok{background:var(--okbg);border-color:var(--ok);animation:pop .4s}
+.opt.no{background:var(--badbg);border-color:var(--bad);animation:shake .4s}
+.opt.gone{opacity:.25;pointer-events:none}
+.opt:disabled{cursor:default}
+@keyframes pop{50%{transform:scale(1.04)}}
+@keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
+.fb{margin-top:6px;padding:14px;border-radius:16px;animation:rise .3s}
+.fb.ok{background:var(--okbg);border:2px solid var(--ok)}.fb.no{background:var(--badbg);border:2px solid var(--bad)}
+.fb h3{font-size:20px;margin-bottom:4px}.fb p{margin:0 0 12px}
+.tools{display:flex;gap:8px;margin-top:6px}
+.tool{flex:1;padding:9px;border-radius:12px;border:2px dashed var(--line);background:transparent;color:var(--pri);font:800 14px Nunito,sans-serif;cursor:pointer}
+.tool:disabled{opacity:.4;cursor:default}
+.badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+.badge{width:56px;height:56px;border-radius:50%;display:grid;place-items:center;font-size:26px;background:var(--bg2);border:3px solid var(--line)}
+.badge.got{border-color:var(--gold);background:linear-gradient(135deg,#fff3c4,#f0c24a);animation:pop .6s}
+.stars{font-size:38px;letter-spacing:6px}
+.rank{font:800 28px "Baloo 2",sans-serif;color:var(--pri)}
+.sum{text-align:left;margin:12px 0;padding-left:20px}.sum li{margin-bottom:6px}
+.conf{position:fixed;top:-30px;font-size:24px;pointer-events:none;z-index:9;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg);opacity:.6}}
+.top{display:flex;justify-content:flex-end;gap:8px;margin-bottom:8px}
+.top button{border:0;background:var(--card);border-radius:12px;padding:6px 10px;font-size:18px;cursor:pointer;border:1px solid var(--line)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+const TF=["Mitos","Fakta"],POS=["Anak Berkonflik dengan Hukum","Anak Korban","Anak Saksi"],FAK=["Faktor Individu","Faktor Keluarga","Faktor Sosial"];
+const L=[
+{n:"Kenali Posisi Anak",ic:"🧒",bd:"🧭",t:20,intro:"Anak dalam proses hukum bisa menjadi pelaku, korban, atau saksi. Tentukan posisinya dengan tepat!",fx:1,qs:[
+{q:"Rafi (15) diduga mencuri bersama temannya dan sedang diperiksa polisi.",o:POS,a:0,e:"Anak yang diduga atau didakwa melakukan tindak pidana disebut Anak yang Berkonflik dengan Hukum."},
+{q:"Sinta (10) dipukuli kakak kelas hingga terluka dan mengalami trauma.",o:POS,a:1,e:"Anak yang mengalami penderitaan fisik, mental, atau kerugian akibat tindak pidana adalah Anak Korban."},
+{q:"Dimas (12) melihat tetangganya dirampok dan dapat menceritakan kejadian itu.",o:POS,a:2,e:"Anak yang dapat memberi keterangan tentang peristiwa yang dialami, dilihat, atau didengarnya adalah Anak Saksi."},
+{q:"Bagas (16) didakwa melakukan tindak pidana.",o:POS,a:0,e:"Status didakwa melakukan tindak pidana menempatkan anak sebagai Anak yang Berkonflik dengan Hukum."},
+{q:"Laras (9) kehilangan uang tabungannya karena dicuri. Ia mengalami kerugian akibat tindak pidana.",o:POS,a:1,e:"Kerugian akibat tindak pidana membuat Laras berposisi sebagai Anak Korban."}]},
+{n:"Mitos atau Fakta?",ic:"🔍",bd:"🔎",t:15,intro:"Banyak orang salah kaprah soal anak dan hukum. Bongkar mitosnya!",fx:1,qs:[
+{q:"“Anak nakal pasti anak jahat.”",o:TF,a:0,e:"Mitos. Hindari label sederhana: perilaku anak muncul dari interaksi banyak faktor, bukan sifat bawaan semata."},
+{q:"Kemampuan anak menilai konsekuensi jangka panjang masih terbatas dibanding orang dewasa.",o:TF,a:1,e:"Fakta. Perkembangan kognitif anak belum matang, termasuk dalam menilai akibat jangka panjang."},
+{q:"UU SPPA hanya berfokus pada penghukuman anak.",o:TF,a:0,e:"Mitos. SPPA berorientasi pada perlindungan, kepentingan terbaik anak, dan kesempatan berkembang kembali secara adaptif."},
+{q:"Perilaku anak dibentuk oleh interaksi faktor pribadi, keluarga, lingkungan, dan situasi.",o:TF,a:1,e:"Fakta. Inilah analisis multifaktorial."},
+{q:"Anak saksi tidak perlu perlindungan karena bukan pelaku.",o:TF,a:0,e:"Mitos. Anak pelaku, korban, maupun saksi sama-sama perlu perlindungan dari secondary victimization."}]},
+{n:"Jagoan SPPA & Restorative Justice",ic:"⚖️",bd:"⚖️",t:20,intro:"Saatnya menguji pemahamanmu tentang UU SPPA, diversi, dan keadilan restoratif.",qs:[
+{q:"Apa yang dimaksud dengan diversi?",o:["Pengalihan penyelesaian perkara anak dari proses peradilan pidana ke proses di luar peradilan pidana","Hukuman penjara yang dipersingkat","Pemindahan anak ke sekolah lain","Pembebasan anak tanpa syarat apa pun"],a:0,e:"Diversi adalah pengalihan penyelesaian perkara anak ke proses di luar peradilan pidana, dilakukan dalam kondisi yang diatur undang-undang."},
+{q:"Apa itu secondary victimization?",o:["Korban yang melapor dua kali","Viktimisasi berulang akibat proses hukum itu sendiri","Korban kedua dalam satu kasus","Anak yang menjadi saksi sekaligus pelaku"],a:1,e:"Secondary victimization adalah viktimisasi berulang yang justru muncul dari proses hukum itu sendiri."},
+{q:"Restorative justice menggeser fokus dari pembalasan menuju…",o:["Pemulihan kerugian, tanggung jawab, keterlibatan pihak terdampak, dan reintegrasi sosial","Penghukuman yang lebih berat","Pembebasan pelaku dari tanggung jawab","Penyelesaian cepat tanpa korban"],a:0,e:"Restorative justice menekankan pemulihan, pertanggungjawaban, keterlibatan pihak terdampak, dan reintegrasi sosial."},
+{q:"“The best interest of the child” dalam SPPA berarti…",o:["Keinginan anak selalu dituruti","Kepentingan terbaik anak menjadi pertimbangan dalam penanganan perkara","Anak tidak boleh diperiksa","Orang tua menentukan putusan"],a:1,e:"SPPA mengorientasikan penanganan anak pada perlindungan dan kepentingan terbaik anak."},
+{q:"Manakah yang BUKAN risiko proses hukum yang represif?",o:["Labeling dan stigma sosial","Putus pendidikan","Penguatan konsep diri yang positif","Risiko masalah perilaku lanjutan"],a:2,e:"Proses represif justru berisiko menurunkan konsep diri, bukan menguatkannya."}]},
+{n:"Detektif Faktor Psikososial",ic:"🕵️",bd:"🧩",t:20,intro:"Kasus: anak 16 tahun mencuri bersama kelompok temannya. Kelompokkan petunjuk berikut ke faktor yang tepat sebelum menyimpulkan penyebabnya.",fx:1,qs:[
+{q:"Petunjuk: kontrol diri anak rendah dan sulit menahan dorongan sesaat.",o:FAK,a:0,e:"Kontrol diri, usia, moralitas, dan riwayat perilaku termasuk faktor individu."},
+{q:"Petunjuk: orang tua jarang mengawasi dan kelekatan (attachment) dengan anak lemah.",o:FAK,a:1,e:"Pola asuh, attachment, dan pengawasan termasuk faktor keluarga."},
+{q:"Petunjuk: kelompok teman mengajak dan menekan anak untuk ikut mencuri.",o:FAK,a:2,e:"Tekanan teman sebaya termasuk faktor sosial."},
+{q:"Petunjuk: pemahaman anak tentang benar dan salah (moralitas) belum matang.",o:FAK,a:0,e:"Moralitas adalah faktor individu."},
+{q:"Petunjuk: lingkungan sekitar memberi kesempatan mudah untuk mencuri.",o:FAK,a:2,e:"Lingkungan dan kesempatan termasuk faktor sosial."}]},
+{n:"Bos Akhir: Keputusan Psikolog",ic:"👑",bd:"👑",t:30,intro:"Tiga keputusan sulit menantimu. Pilih sikap profesional yang empatik, etis, dan berpihak pada kepentingan terbaik anak.",qs:[
+{q:"Seorang petugas langsung menyimpulkan, “Anak ini memang bandel dari sananya.” Sikap psikolog yang tepat?",o:["Setuju agar proses cepat selesai","Menganalisis faktor individu, keluarga, lingkungan, dan situasi sebelum menyimpulkan","Menyerahkan semuanya pada hasil tes tunggal","Mencari kesalahan orang tua saja"],a:1,e:"Perilaku anak bersifat multifaktorial. Hindari label sederhana “anak nakal = anak jahat”."},
+{q:"Kasus pencurian itu punya korban. Pendekatan restoratif yang paling tepat?",o:["Mengabaikan korban agar fokus ke anak","Menghukum seberat mungkin sebagai pembalasan","Melibatkan pihak terdampak, anak bertanggung jawab, dan kerugian dipulihkan","Menutup kasus tanpa pembicaraan apa pun"],a:2,e:"Restorative justice menggabungkan pemulihan, pertanggungjawaban, kepentingan korban, dan kepentingan terbaik anak."},
+{q:"Setelah proses selesai, anak ingin kembali sekolah namun lingkungan menolaknya. Fokus utamamu?",o:["Membiarkan anak mencari jalannya sendiri","Reintegrasi sosial: dukungan keluarga, sekolah, dan lingkungan agar anak berkembang adaptif","Memindahkan anak jauh dari semua orang","Menambah label agar masyarakat waspada"],a:1,e:"Penolakan dan stigma meningkatkan risiko putus sekolah dan masalah perilaku lanjutan. Reintegrasi sosial adalah kunci pemulihan."}]}];
+const SUM=["Anak pelaku, korban, atau saksi punya kebutuhan berbeda, tetapi sama-sama perlu perlindungan dari secondary victimization.","UU SPPA (2012) berorientasi pada perlindungan dan kepentingan terbaik anak.","Perilaku anak bersifat multifaktorial.","Restorative justice dan diversi mengutamakan pemulihan dan reintegrasi sosial.","Proses hukum yang represif berisiko menimbulkan stigma, putus sekolah, dan masalah perilaku lanjutan."];
+const $=id=>document.getElementById(id),app=$("app");
+let S,T,ctx,snd=true;
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+function beep(f,d,ty){if(!snd)return;try{ctx=ctx||new (window.AudioContext||window.webkitAudioContext)();const o=ctx.createOscillator(),g=ctx.createGain();o.type=ty||"sine";o.frequency.value=f;g.gain.value=.08;o.connect(g);g.connect(ctx.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+d);o.stop(ctx.currentTime+d)}catch(e){}}
+function jingle(n){n.forEach((f,i)=>setTimeout(()=>beep(f,.18,"triangle"),i*120))}
+function confetti(){const e=["🎉","⭐","✨","💜","🏅","🌟"];for(let i=0;i<28;i++){const s=document.createElement("span");s.className="conf";s.textContent=e[i%e.length];s.style.left=Math.random()*100+"vw";s.style.animationDuration=(2+Math.random()*2)+"s";s.style.animationDelay=Math.random()*.6+"s";document.body.appendChild(s);setTimeout(()=>s.remove(),5000)}}
+function bar(){return `<div class="top"><button onclick="snd=!snd;this.textContent=snd?'🔊':'🔇'" aria-label="Suara">${snd?"🔊":"🔇"}</button></div>`}
+function home(){clearInterval(T);S={l:0,i:0,h:3,s:0,st:0,f:2,m:0,b:[],ls:0,ok:0,all:0};
+app.innerHTML=bar()+`<div class="card hero"><div class="big">🧒⚖️</div><span class="tag">Psikologi Forensik • Pertemuan 3</span><h1>Misi Pendamping ABH</h1><p class="mute">Kamu adalah psikolog kepolisian. Lindungi anak yang berhadapan dengan hukum, selesaikan 5 level, dan raih gelar tertinggi!</p><div class="badges">${L.map(l=>`<div class="badge">${l.bd}</div>`).join("")}</div><p class="mute" style="font-size:14px">❤️ 3 nyawa • ⏱️ Waktu terbatas • 🔥 Streak berlipat • ✂️ 2× bantuan 50:50</p><button class="btn gold" onclick="intro()">Mulai Misi</button></div>`}
+function intro(){clearInterval(T);const l=L[S.l];S.ls=S.s;beep(520,.15,"triangle");
+app.innerHTML=bar()+`<div class="card hero"><span class="tag">Level ${S.l+1} dari ${L.length}</span><div class="big">${l.ic}</div><h2>${l.n}</h2><p class="mute">${l.intro}</p><p class="mute" style="font-size:14px">${l.qs.length} pertanyaan • ${l.t} detik per soal</p><button class="btn" onclick="S.i=0;S.m=0;ask()">Siap!</button></div>`}
+function hud(){return `<div class="hud"><span class="pill hearts">${"❤️".repeat(S.h)}${"🖤".repeat(3-S.h)}</span><span class="pill">🔥 ${S.st}</span><span class="pill">⭐ ${S.s}</span></div>`}
+function ask(){const l=L[S.l],q=l.qs[S.i];S.lock=false;S.tl=l.t;S.ord=q.o.map((_,i)=>i);if(!l.fx)S.ord=shuf(S.ord);
+app.innerHTML=bar()+hud()+`<div class="card"><div class="dots">${l.qs.map((_,i)=>`<b class="${i<S.i?"done":i==S.i?"on":""}"></b>`).join("")}</div><span class="tag">${l.ic} ${l.n}</span><div class="bar"><i id="tb"></i></div><div class="q">${q.q}</div><div id="opts">${S.ord.map((oi,k)=>`<button class="opt" data-o="${oi}" onclick="pick(${oi})"><span class="k">${"ABCD"[k]}</span><span>${q.o[oi]}</span></button>`).join("")}</div><div id="fb"></div><div class="tools"><button class="tool" id="ff" onclick="fifty()" ${S.f<1||q.o.length<3?"disabled":""}>✂️ 50:50 (${S.f})</button></div></div>`;
+clearInterval(T);T=setInterval(()=>{S.tl-=.1;$("tb").style.width=Math.max(0,S.tl/l.t*100)+"%";if(S.tl<=5&&Math.round(S.tl*10)%10==0)beep(300,.05,"square");if(S.tl<=0){clearInterval(T);pick(-1)}},100)}
+function fifty(){const q=L[S.l].qs[S.i];if(S.f<1||S.lock)return;S.f--;let w=shuf(q.o.map((_,i)=>i).filter(i=>i!=q.a));w.slice(0,q.o.length>3?2:1).forEach(i=>document.querySelector(`[data-o="${i}"]`).classList.add("gone"));$("ff").disabled=true;$("ff").textContent="✂️ 50:50 ("+S.f+")";beep(660,.1)}
+function pick(k){if(S.lock)return;S.lock=true;clearInterval(T);const l=L[S.l],q=l.qs[S.i],ok=k==q.a;S.all++;
+document.querySelectorAll(".opt").forEach(b=>{b.disabled=true;const o=+b.dataset.o;if(o==q.a)b.classList.add("ok");else if(o==k)b.classList.add("no")});
+$("ff").disabled=true;let msg;
+if(ok){S.ok++;S.st++;const p=100+Math.ceil(S.tl)*5+Math.min(S.st-1,5)*20;S.s+=p;msg=`<h3>✅ Tepat! +${p} poin</h3>`;jingle([523,659,784])}
+else{S.st=0;S.h--;S.m++;msg=`<h3>${k<0?"⏰ Waktu habis!":"❌ Belum tepat"}</h3>`;beep(180,.35,"sawtooth")}
+const last=S.i>=l.qs.length-1,dead=S.h<=0;
+$("fb").innerHTML=`<div class="fb ${ok?"ok":"no"}">${msg}<p>${q.e}</p><button class="btn ${ok?"":"gold"}" onclick="${dead?"over()":last?"done()":"S.i++;ask()"}">${dead?"Lanjut":last?"Selesaikan Level":"Soal Berikutnya"}</button></div>`;
+$("fb").scrollIntoView({behavior:"smooth",block:"nearest"});document.querySelector(".hud").outerHTML=hud()}
+function over(){clearInterval(T);app.innerHTML=bar()+`<div class="card hero"><div class="big">💔</div><h2>Misi Tertunda</h2><p class="mute">Nyawamu habis di level ${S.l+1}. Seorang psikolog selalu belajar dari kesalahan, mari coba lagi dengan bekal penjelasan tadi!</p><button class="btn gold" onclick="S.h=3;S.s=S.ls;S.st=0;S.f=Math.max(S.f,1);intro()">Ulangi Level ${S.l+1}</button><br><button class="btn ghost" onclick="home()">Kembali ke Awal</button></div>`}
+function done(){clearInterval(T);const l=L[S.l],perfect=S.m==0;S.b.push({ic:l.bd,p:perfect});if(perfect)S.s+=200;
+const st=perfect?3:S.m==1?2:1;confetti();jingle([523,659,784,1047]);
+const lastL=S.l>=L.length-1;
+app.innerHTML=bar()+hud()+`<div class="card hero"><span class="tag">Level ${S.l+1} selesai</span><div class="stars">${"⭐".repeat(st)}${"☆".repeat(3-st)}</div><h2>${l.n}</h2><div class="badges"><div class="badge got">${l.bd}</div></div><p class="mute">${perfect?"Sempurna tanpa salah! Bonus +200 poin.":"Lencana didapat! Coba tanpa salah untuk bonus."}</p><button class="btn gold" onclick="${lastL?"fin()":"S.l++;S.h=Math.min(3,S.h+1);intro()"}">${lastL?"Lihat Hasil Akhir":"Level Berikutnya"}</button>${lastL?"":'<p class="mute" style="font-size:14px;margin:10px 0 0">Bonus: +1 nyawa untuk level berikutnya (maks. 3)</p>'}</div>`}
+function fin(){const pct=S.ok/S.all,r=pct>.9&&S.h==3?["🏆","Penjaga Masa Depan Anak"]:pct>.75?["🥇","Psikolog Forensik Andal"]:pct>.55?["🥈","Psikolog Pendamping"]:["🥉","Psikolog Magang"];confetti();setTimeout(confetti,900);
+app.innerHTML=bar()+`<div class="card hero"><span class="tag">Misi selesai</span><div class="big">${r[0]}</div><div class="rank">${r[1]}</div><h2 style="margin-top:6px">⭐ ${S.s} poin</h2><p class="mute">Akurasi ${Math.round(pct*100)}% (${S.ok} dari ${S.all} soal)</p><div class="badges">${S.b.map(b=>`<div class="badge got">${b.ic}</div>`).join("")}</div><h3 style="text-align:left">Yang perlu diingat</h3><ul class="sum">${SUM.map(s=>`<li>${s}</li>`).join("")}</ul><p class="mute" style="font-size:14px">Pertemuan berikutnya: Psikologi Korban dan Viktimisasi</p><button class="btn gold" onclick="home()">Main Lagi</button></div>`}
+home();
+</script>
+</body>
+</html>
